@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+body {
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+  color: rgb(50 50 50);
+}
+
+span {
+  display: block;
+}
+
+.map-wrapper {
+  position: relative;
+}
+
+#map {
+  width: 1920px;
+  height: 1080px;
+}
+
+.map__window {
+  position: absolute;
+  top: 50px;
+  left: 70px;
+  z-index: 100;
+
+  width: 380px;
+
+  margin-bottom: 20px;
+  background: #fff1e7;
+  background: linear-gradient(137deg, #fff1e7 0, #efd9c8 100%);
+  margin-top: 10px;
+
+  padding: 24px;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.25);
+
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.map__window.map__window--active {
+  opacity: 1;
+}
+
+.map__window-subtitle {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+.map__window-address {
+  font-size: 1.1em;
+  display: block;
+  font-weight: 600;
+
+  margin-bottom: 15px;
+}
+.map__window-price__subtitle {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.map__window-price {
+  font-size: 2.6em;
+  font-weight: 500;
+  color: red;
+  line-height: 32px;
+  margin-bottom: 10px;
+}
+
+.map__window-distance {
+  font-size: 0.8em;
+  margin-top: 5px;
+  margin-bottom: 26px;
+}
+.map__window-info {
+}
