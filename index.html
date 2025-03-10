@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Калькулятор стоимости доставки Яндекс.Карты</title>
+    <meta charset="utf-8" />
+    <style>
+      #map {
+        width: 800px;
+        height: 600px;
+      }
+    </style>
+
+    <script
+      src="https://api-maps.yandex.ru/2.0-stable/?apikey=aa759d44-ec53-4361-b62d-33313270ae06&load=package.full&lang=ru-RU"
+      type="text/javascript"
+    ></script>
+
+    <script>
+      ymaps.ready(init);
+
+      function init() {
+        var myMap = new ymaps.Map("map", {
+          center: [55.753215, 37.622504],
+          zoom: 10,
+        });
+      }
+
+      let route = ymaps
+        .route([
+          "тест",
+          {
+            type: "viaPoint",
+            point: [59.99328, 30.342791],
+          },
+          "Санкт-Петербург, Финляндский вокзал",
+        ])
+        .then(
+          function (route) {
+            myMap.geoObjects.add(route);
+          },
+          function (error) {
+            console.log(error);
+
+            alert("возникла ошибка", error);
+          }
+        );
+
+      myMap.geoObjects.add(route);
+    </script>
+
+    <!-- 
+    <script
+      src="https://api-maps.yandex.ru/2.1/?apikey=&lang=ru_RU"
+      crossorigin="anonymous"
+    ></script> -->
+  </head>
+
+  <body>
+    <h1>Калькулятор стоимости доставки</h1>
+
+    <label for="address">Ваш адрес:</label>
+    <input type="text" id="address" placeholder="Введите ваш адрес" />
+    <button onclick="calculateDelivery()">Рассчитать</button>
+
+    <div id="map"></div>
+
+    <p id="result"></p>
+  </body>
+</html>
