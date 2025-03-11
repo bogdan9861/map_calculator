@@ -235,6 +235,8 @@ function init() {
   let userRoute;
 
   const calculateDistance = (address) => {
+    windowNode.classList.add("map__window--active");
+
     ymaps.route(["г. Москва ул.Адмирала Корнилова 23б", address], {}).done(
       function (route) {
         route.options.set("mapStateAutoApply", true);
@@ -288,8 +290,6 @@ function init() {
       balloonContent: findNearestAddress(coords),
     });
     myMap.geoObjects.add(userMarker);
-
-    windowNode.classList.add("map__window--active");
   });
 
   function geocodeAddress(address) {
@@ -298,33 +298,20 @@ function init() {
       function (res) {
         var coords = res.geoObjects.get(0).geometry.getCoordinates();
 
+        if (userMarker) {
+          myMap.geoObjects.remove(userMarker);
+        }
+
         // Создаем метку и добавляем на карту
-        var myPlacemark = new ymaps.Placemark(coords, {
+        userMarker = new ymaps.Placemark(coords, {
           hintContent: address,
         });
 
-        myMap.geoObjects.add(myPlacemark);
-        // Перемещаем карту к метке
-        myMap.panTo(coords, {
-          flying: true,
-          duration: 1000,
-        });
+        userMarkerCoords = coords;
 
-        // Создаем объект для ObjectManager'а
-        var geoObject = {
-          type: "Feature",
-          id: Date.now(), // Уникальный ID
-          geometry: {
-            type: "Point",
-            coordinates: coords,
-          },
-          properties: {
-            hintContent: address,
-            balloonContent: address,
-          },
-        };
+        myMap.geoObjects.add(userMarker);
 
-        objectManager.add(geoObject); // Добавляем  метку через ObjectManager.
+        calculateDistance(address);
       },
       function (err) {
         alert("Не удалось геокодировать адрес: " + address);
@@ -373,6 +360,6 @@ function init() {
 
   addressBtn.addEventListener("click", () => {
     const address = addressInput.value;
-    calculateDistance(address);
+    geocodeAddress(address);
   });
 }
