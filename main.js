@@ -235,8 +235,6 @@ function init() {
   let userRoute;
 
   const calculateDistance = (address) => {
-    windowNode.classList.add("map__window--active");
-
     ymaps.route(["г. Москва ул.Адмирала Корнилова 23б", address], {}).done(
       function (route) {
         route.options.set("mapStateAutoApply", true);
@@ -320,6 +318,8 @@ function init() {
   }
 
   function findNearestAddress(coords) {
+    windowNode.classList.add("map__window--active");
+
     ymaps
       .geocode(coords, {
         kind: "house", // Ищем только дома
