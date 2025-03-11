@@ -288,6 +288,8 @@ function init() {
       balloonContent: findNearestAddress(coords),
     });
     myMap.geoObjects.add(userMarker);
+
+    windowNode.classList.add("map__window--active");
   });
 
   function geocodeAddress(address) {
@@ -318,8 +320,6 @@ function init() {
   }
 
   function findNearestAddress(coords) {
-    windowNode.classList.add("map__window--active");
-
     ymaps
       .geocode(coords, {
         kind: "house", // Ищем только дома
@@ -361,5 +361,6 @@ function init() {
   addressBtn.addEventListener("click", () => {
     const address = addressInput.value;
     geocodeAddress(address);
+    windowNode.classList.add("map__window--active");
   });
 }
