@@ -209,7 +209,7 @@ function init() {
     (bluePolygon = new ymaps.Polygon(
       [polygonCoordinates],
       {
-        hintContent: "Приблизительная красная область",
+        hintContent: "",
       },
       {
         fillColor: "#A39CE6", // Красный полупрозрачный
